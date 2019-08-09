@@ -2,6 +2,30 @@ const Validator = require('../index')
 
 describe('Validator Object tests', () => {
 
+    it('should check validations for nested objects', () => {
+        const constraints = {
+            person: {
+                name: "nonEmptyString",
+                email: "nonEmptyString, validEmail"
+            }
+        }
+
+        const validator = new Validator(constraints);
+
+        expect(validator.validate({
+            person:
+                {
+                    name: "gourav",
+                    email: ""
+                }
+        })).toEqual({
+            person: {
+                email: ["Empty String", "Invalid email"]
+            }
+        })
+    })
+
+
     it('should get new validation functions by validation strategy', () => {
         Validator.addValidationRule('greaterThanFive', (subject) => {
             if (subject > 5) {
@@ -10,11 +34,11 @@ describe('Validator Object tests', () => {
             return "Number should be greater than five"
         })
 
-        const rules = {
+        const constraints = {
             age: "greaterThanFive"
         }
 
-        let validator = new Validator(rules)
+        let validator = new Validator(constraints)
         expect(validator.validate({age: 7})).toBe(null)
         expect(validator.validate({age: 4})).toEqual({age: ['Number should be greater than five']})
 
@@ -22,12 +46,12 @@ describe('Validator Object tests', () => {
 
     it('should initialise validator with validation rules and then validate correct input as null', () => {
 
-        const rules = {
+        const constraints = {
             name: "nonEmptyString",
             email: "nonEmptyString, validEmail"
         }
 
-        const validator = new Validator(rules)
+        const validator = new Validator(constraints)
 
         expect(validator.validate({name: "gourav", email: "mail@gourav.info"})).toBe(null)
 
@@ -35,12 +59,12 @@ describe('Validator Object tests', () => {
 
     it('Should give error when invalid data is passed', () => {
 
-        const rules = {
+        const constraints = {
             name: "nonEmptyString",
             email: "nonEmptyString, validEmail"
         }
 
-        const validator = new Validator(rules)
+        const validator = new Validator(constraints)
 
         expect(validator.validate({name: "", email: "mail"})).toEqual({
             name: ["Empty String"],
@@ -55,17 +79,63 @@ describe('Validator Object tests', () => {
 
     it('Should return error for the same key as of subject', () => {
 
-        const rules = {
+        const constraints = {
             anotherName: "nonEmptyString"
         }
 
-        const validator = new Validator(rules)
+        const validator = new Validator(constraints)
 
         expect(validator.validate({anotherName: ""})).toEqual({anotherName: ["Empty String"]})
 
 
     })
 
+    it('should check validations for array based nested objects', () => {
+        const constraints = {
+            person: {
+                children: [
+                    {
+                        name: "nonEmptyString",
+                        age: "positiveInteger"
+                    }
+                ]
+            }
+        };
+
+        const validator = new Validator(constraints);
+        let expected = validator.validate({
+            person:
+                {
+                    children: [
+                        {
+                            name: "peter",
+                            age: -1
+                        },
+                        {
+                            name: "",
+                            age: 5
+                        }
+                    ]
+                }
+        })
+        debugger
+        expect(expected).toEqual(
+            {
+                person: {
+                    children: {
+                        0: {
+                            age: ["non positive integer"]
+                        },
+                        1: {
+                            name: ["Empty String"]
+                        }
+                    }
+                }
+            }
+        )
+
+    })
 })
+
 
 
