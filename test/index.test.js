@@ -74,6 +74,25 @@ describe('Validator Object tests', () => {
         }).toThrow()
     })
 
+    it('should throw exception if given validation function is not defined in namespace', () => {
+        Validator.addValidationStrategy(NumbersStrategy)
+        const constraints = {
+            person: {
+                age: "NumberStrategy:Found-110"
+            }
+        }
+        const validator = new Validator(constraints);
+
+        expect(() => {
+            validator.validate({
+                person:
+                    {
+                        age: 119
+                    }
+            })
+        }).toThrow()
+    })
+
     it('should check validations for nested objects', () => {
         const constraints = {
             person: {
