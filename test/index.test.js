@@ -59,7 +59,7 @@ describe('Validator Object tests', () => {
     it('should throw exception if given validation function is not defined', () => {
         const constraints = {
             person: {
-                age: "lessThan-110"
+                age: "notFound-110"
             }
         }
         const validator = new Validator(constraints);
