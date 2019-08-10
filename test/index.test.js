@@ -1,6 +1,36 @@
 const Validator = require('../index')
+const NumbersStrategy = require('../lib/NumberStrategy')
+
 
 describe('Validator Object tests', () => {
+
+
+    it('should implement strategy for package based validation rules', () => {
+        Validator.addValidationStrategy(NumbersStrategy)
+        const constraints = {
+            person: {
+                name: "nonEmptyString",
+                email: "nonEmptyString, validEmail",
+                age: "NumberStrategy:lessThan100"
+            }
+        }
+
+        const validator = new Validator(constraints);
+
+        expect(validator.validate({
+            person:
+                {
+                    name: "gourav",
+                    email: "",
+                    age:101
+                }
+        })).toEqual({
+            person: {
+                email: ["Empty String", "Invalid email"],
+                age:["less than 100"]
+            }
+        })
+    })
 
     it('should check validations for nested objects', () => {
         const constraints = {

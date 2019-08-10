@@ -10,19 +10,31 @@ const ruleFunctions = {
         return !validateEmail(subject) ? 'Invalid email' : null;
     },
     positiveInteger: function (subject) {
-        debugger
         return Number.isInteger(subject) && subject > 0 ? null : 'non positive integer';
     }
-
 };
 
+const strategyMap = {};
+
 const Validator = function (constraints) {
+
+    this.getStrategyValuesIfExists = function(constraintValue) {
+        let strategyValues = constraintValue.split(':');
+        return strategyValues.length > 1 ? strategyValues : null;
+    }
 
     this.validate = function (input) {
         let output = {};
         for (let key in constraints) {
+
             if (typeof constraints[key] === "string") {
                 output[key] = [];
+                let strategyValues = this.getStrategyValuesIfExists(constraints[key]);
+                if (strategyValues) {
+                    let error = strategyMap[strategyValues[0]][strategyValues[1]](input[key]);
+                    error && output[key].push(error);
+                    continue;
+                }
                 for (validationRule of constraints[key].split(',')) {
                     if (ruleFunctions[validationRule.trim()]) {
                         let error = ruleFunctions[validationRule.trim()](input[key]);
@@ -51,7 +63,6 @@ const Validator = function (constraints) {
 
         }
         return Object.keys(output).length === 0 ? null : output;
-
     }
 
 }
@@ -59,4 +70,9 @@ const Validator = function (constraints) {
 Validator.addValidationRule = function (ruleName, ruleFunction) {
     ruleFunctions[ruleName] = ruleFunction;
 }
+
+Validator.addValidationStrategy = function(strategy) {
+    strategyMap[strategy.name] = strategy;
+}
+
 module.exports = Validator;
