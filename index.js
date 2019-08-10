@@ -23,14 +23,21 @@ const Validator = function (constraints) {
         return strategyValues.length > 1 ? strategyValues : null;
     }
 
+
     this.validate = function (input) {
         let output = {};
         for (let key in constraints) {
-
             if (typeof constraints[key] === "string") {
                 output[key] = [];
                 let strategyValues = this.getStrategyValuesIfExists(constraints[key]);
                 if (strategyValues) {
+                    let closureArg = strategyValues[1].split('-');
+                    if (closureArg.length > 1) {
+                        let closureFunct = strategyMap[strategyValues[0]][closureArg[0]](closureArg[1]);
+                        let error = closureFunct(input[key]);
+                        error && output[key].push(error);
+                        continue;
+                    }
                     let error = strategyMap[strategyValues[0]][strategyValues[1]](input[key]);
                     error && output[key].push(error);
                     continue;
@@ -39,6 +46,8 @@ const Validator = function (constraints) {
                     if (ruleFunctions[validationRule.trim()]) {
                         let error = ruleFunctions[validationRule.trim()](input[key]);
                         error && output[key].push(error);
+                    } else {
+                        throw new Error(validationRule.trim() + ' does not exist');
                     }
                 }
                 continue;
@@ -57,7 +66,8 @@ const Validator = function (constraints) {
 
         }
         for (key in output) {
-            if (output[key].length === 0) {
+
+            if (output[key] === null || output[key].length === 0) {
                 delete output[key];
             }
 

@@ -22,14 +22,56 @@ describe('Validator Object tests', () => {
                 {
                     name: "gourav",
                     email: "",
-                    age:101
+                    age: 101
                 }
         })).toEqual({
             person: {
                 email: ["Empty String", "Invalid email"],
-                age:["less than 100"]
+                age: ["less than 100"]
             }
         })
+    })
+
+    it('should implement closure based validation rules with params for namespace', () => {
+        Validator.addValidationStrategy(NumbersStrategy)
+        Validator.addValidationRule('lessThan', NumbersStrategy.lessThan)
+        const constraints = {
+            person: {
+                age: "NumberStrategy:lessThan-100"
+            }
+        }
+
+        const validator = new Validator(constraints);
+
+        expect(validator.validate({
+            person:
+                {
+                    age: 101
+                }
+        })).toEqual({
+            person: {
+                age: ["less than 100"]
+            }
+        })
+
+    })
+
+    it('should throw exception if given validation function is not defined', () => {
+        const constraints = {
+            person: {
+                age: "lessThan-110"
+            }
+        }
+        const validator = new Validator(constraints);
+
+        expect(() => {
+            validator.validate({
+                person:
+                    {
+                        age: 119
+                    }
+            })
+        }).toThrow()
     })
 
     it('should check validations for nested objects', () => {
