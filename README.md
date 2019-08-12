@@ -1,5 +1,13 @@
-# validator
-![alt text](https://travis-ci.org/ashwinijalkote/validator.svg?branch=master)
+# Maanyakaran ![alt text](https://travis-ci.org/ashwinijalkote/maanyakaran.svg?branch=master)
+
+
+
+ Maanyakarn ([मान्यकरण](https://translate.google.co.in/#view=home&op=translate&sl=hi&tl=en&text=maanyakaran
+)) is a hindi word which means validation. Which is the basic offering of this micro framework. 
+Maanyakarn provide easy and extensible way for performing validations over JS objects (primarily states of react, redux and similar frameworks).
+
+
+
 
 ### License (MIT)
 ```

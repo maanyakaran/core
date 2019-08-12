@@ -1,4 +1,4 @@
-const Validator = require('../index')
+const Maanyakaran = require('../index')
 const NumbersStrategy = require('../lib/NumberStrategy')
 
 
@@ -6,7 +6,7 @@ describe('Validator Object tests', () => {
 
 
     it('should implement strategy for package based validation rules', () => {
-        Validator.addValidationStrategy(NumbersStrategy)
+        Maanyakaran.addValidationStrategy(NumbersStrategy)
         const constraints = {
             person: {
                 name: "nonEmptyString",
@@ -15,7 +15,7 @@ describe('Validator Object tests', () => {
             }
         }
 
-        const validator = new Validator(constraints);
+        const validator = new Maanyakaran(constraints);
 
         expect(validator.validate({
             person:
@@ -33,15 +33,15 @@ describe('Validator Object tests', () => {
     })
 
     it('should implement closure based validation rules with params for namespace', () => {
-        Validator.addValidationStrategy(NumbersStrategy)
-        Validator.addValidationRule('lessThan', NumbersStrategy.lessThan)
+        Maanyakaran.addValidationStrategy(NumbersStrategy)
+        Maanyakaran.addValidationRule('lessThan', NumbersStrategy.lessThan)
         const constraints = {
             person: {
                 age: "NumberStrategy:lessThan-100"
             }
         }
 
-        const validator = new Validator(constraints);
+        const validator = new Maanyakaran(constraints);
 
         expect(validator.validate({
             person:
@@ -62,7 +62,7 @@ describe('Validator Object tests', () => {
                 age: "notFound-110"
             }
         }
-        const validator = new Validator(constraints);
+        const validator = new Maanyakaran(constraints);
 
         expect(() => {
             validator.validate({
@@ -75,13 +75,13 @@ describe('Validator Object tests', () => {
     })
 
     it('should throw exception if given validation function is not defined in namespace', () => {
-        Validator.addValidationStrategy(NumbersStrategy)
+        Maanyakaran.addValidationStrategy(NumbersStrategy)
         const constraints = {
             person: {
                 age: "NumberStrategy:Found-110"
             }
         }
-        const validator = new Validator(constraints);
+        const validator = new Maanyakaran(constraints);
 
         expect(() => {
             validator.validate({
@@ -101,7 +101,7 @@ describe('Validator Object tests', () => {
             }
         }
 
-        const validator = new Validator(constraints);
+        const validator = new Maanyakaran(constraints);
 
         expect(validator.validate({
             person:
@@ -118,7 +118,7 @@ describe('Validator Object tests', () => {
 
 
     it('should get new validation functions by validation strategy', () => {
-        Validator.addValidationRule('greaterThanFive', (subject) => {
+        Maanyakaran.addValidationRule('greaterThanFive', (subject) => {
             if (subject > 5) {
                 return null
             }
@@ -129,7 +129,7 @@ describe('Validator Object tests', () => {
             age: "greaterThanFive"
         }
 
-        let validator = new Validator(constraints)
+        let validator = new Maanyakaran(constraints)
         expect(validator.validate({age: 7})).toBe(null)
         expect(validator.validate({age: 4})).toEqual({age: ['Number should be greater than five']})
 
@@ -142,7 +142,7 @@ describe('Validator Object tests', () => {
             email: "nonEmptyString, validEmail"
         }
 
-        const validator = new Validator(constraints)
+        const validator = new Maanyakaran(constraints)
 
         expect(validator.validate({name: "gourav", email: "mail@gourav.info"})).toBe(null)
 
@@ -155,7 +155,7 @@ describe('Validator Object tests', () => {
             email: "nonEmptyString, validEmail"
         }
 
-        const validator = new Validator(constraints)
+        const validator = new Maanyakaran(constraints)
 
         expect(validator.validate({name: "", email: "mail"})).toEqual({
             name: ["Empty String"],
@@ -174,7 +174,7 @@ describe('Validator Object tests', () => {
             anotherName: "nonEmptyString"
         }
 
-        const validator = new Validator(constraints)
+        const validator = new Maanyakaran(constraints)
 
         expect(validator.validate({anotherName: ""})).toEqual({anotherName: ["Empty String"]})
 
@@ -193,7 +193,7 @@ describe('Validator Object tests', () => {
             }
         };
 
-        const validator = new Validator(constraints);
+        const validator = new Maanyakaran(constraints);
         let expected = validator.validate({
             person:
                 {

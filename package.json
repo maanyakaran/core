@@ -1,7 +1,7 @@
 {
-  "name": "validator",
+  "name": "Maanyakaran",
   "version": "1.0.0",
-  "description": "JS object validations ",
+  "description": "Maanyakaran(मान्यकरण) [meaning: validation], Micro framework for validation of JS Objects or react and redux etc states",
   "main": "index.js",
   "repository": "git@github.com:ashwinijalkote/validator.git",
   "author": "Ashwini Jalkote",

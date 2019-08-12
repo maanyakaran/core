@@ -16,7 +16,7 @@ const ruleFunctions = {
 
 const strategyMap = {};
 
-const Validator = function (constraints) {
+const Maanyakaran = function (constraints) {
 
     function getRuleFunction(ruleString) {
 
@@ -64,7 +64,7 @@ const Validator = function (constraints) {
         function handleArrayInRule(key) {
             output[key] = {};
             for (let inputArrayIdx in input[key]) {
-                output[key][inputArrayIdx] = new Validator(constraints[key][0]).validate(input[key][inputArrayIdx]);
+                output[key][inputArrayIdx] = new Maanyakaran(constraints[key][0]).validate(input[key][inputArrayIdx]);
             }
         }
 
@@ -84,7 +84,7 @@ const Validator = function (constraints) {
                 continue;
             }
             if (Object.keys(constraints[key]).length > 0) {
-                output[key] = new Validator(constraints[key]).validate(input[key]);
+                output[key] = new Maanyakaran(constraints[key]).validate(input[key]);
                 continue;
             }
 
@@ -101,12 +101,12 @@ const Validator = function (constraints) {
 
 }
 
-Validator.addValidationRule = function (ruleName, ruleFunction) {
+Maanyakaran.addValidationRule = function (ruleName, ruleFunction) {
     ruleFunctions[ruleName] = ruleFunction;
 }
 
-Validator.addValidationStrategy = function (strategy) {
+Maanyakaran.addValidationStrategy = function (strategy) {
     strategyMap[strategy.name] = strategy;
 }
 
-module.exports = Validator;
+module.exports = Maanyakaran;
