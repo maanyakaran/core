@@ -7,7 +7,9 @@
 Maanyakarn provide easy and extensible way for performing validations over JS objects (primarily states of react, redux and similar frameworks).
 
 
+### Usage Guide
 
+### Writing and publishing ruleset
 
 ### License (MIT)
 ```
