@@ -39,11 +39,25 @@ Install the library
   
   4. Types of values in constraint<br/>
      i. string:<br/>
-        String could be comma separated strings or just one string.
-        Each string could be in the form : 
-        <Namespace:><validationFunctionName> or 
-        <Namespace:><validationFunctionName-><closureArgument>
+        String could be comma separated strings or just one string.<br/>
+        Each string could be in the form : <br/>
+        &lt;Namespace:&gt;&lt;validationFunctionName&gt <br/>
+        or <br/>
+        &lt;Namespace:&gt;&lt;validationFunctionName-&gt;&lt;closureArgument&gt;<br/>
         where Namespace is optional.
+        
+        eg:
+        ```javascript
+           const constraints = 
+             {
+                 person: {
+                     age: "NumberStrategy:lessThan-100",
+                     name: "nonEmptyString",
+                     email: "nonEmptyString, validEmail",
+                     age: "NumberStrategy:lessThan100"
+                 }
+             }
+        ```
           
      ii. Object: <br/>
          value can itself be an object to validate for nested object structure in the input.
