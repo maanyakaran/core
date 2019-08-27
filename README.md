@@ -38,8 +38,8 @@ import Maanyakaran from 'maanyakaran';
      ```
 
   2. Input:<br/>
-     Instance of Maanyakaran object invokes validate method with input as an argument and validates the input against 
-     the constraints.
+     Instance of Maanyakaran object invokes validate method with input as an argument and validates input against 
+     given constraints.
      ```javascript
          validator.validate({anotherName: "maanyakaran"})
      ```
@@ -77,6 +77,7 @@ import Maanyakaran from 'maanyakaran';
           validated as per the containing constraint object in the array. 
            
           eg
+          ```javascript
           const constraints = {
               person: {
                   children: [
@@ -87,8 +88,9 @@ import Maanyakaran from 'maanyakaran';
                   ]
               }                  
           };
+          ```
                       
-### Out of the box validation
+### Out of box validation
 
     Maanyakaran comes up with a few built-in validator functions:<br/>
     
