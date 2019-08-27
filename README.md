@@ -6,8 +6,93 @@
 )) is a hindi word which means validation, which is the basic offering of this micro framework. 
 Maanyakarn provide easy and extensible way for performing validations over JS objects (primarily states of react, redux and similar frameworks).
 
+###Installation
+
+Install the library
+```bash
+ npm install maanyakaran
+```
 
 ### Usage Guide
+
+#####Concepts
+
+  1. Constraints:
+     Maanyakaran class takes constraints object as an argument to its constructor which contains key value pairs, where 
+     value defines rules for the key.
+     ```javascript
+        const constraints = {
+             anotherName: "nonEmptyString"
+        }
+        const validator = new Maanyakaran(constraints)
+     ```
+
+  2. Input:
+     Instance of Maanyakaran object invokes validate method with input as an argument and validates the input against 
+     the constraints.
+     ```javascript
+         validator.validate({anotherName: "maanyakaran"})
+     ```
+     
+  3. Validator method
+     Validator method returns error message if the value for the corresponding key is invalid as per the constraint.        
+  
+  4. Types of values in constraint
+     i. string:
+        String could be comma separated strings or just one string.
+        Each string could be in the form : 
+        <Namespace:><validationFunctionName> or 
+        <Namespace:><validationFunctionName-><closureArgument>
+        where Namespace is optional.
+          
+     ii. Object: 
+         value can itself be an object to validate for nested object structure in the input.
+     
+     iii. Array object: 
+          value can also be an array to indicate that the corresponding key can occur multiple times and should be 
+          validated as per the containing constraint object in the array. 
+           
+          eg
+          const constraints = {
+              person: {
+                  children: [
+                      {
+                          name: "nonEmptyString",
+                          age: "positiveInteger"
+                      }
+                  ]
+              }                  
+          };
+                      
+
+#####Without ES6
+```javascript
+var Maanyakaran = require('maanyakaran');
+```
+
+#####ES6
+```javascript
+import Maanyakaran from 'maanyakaram';
+```
+
+
+### Creating Custom Strategy and Extension
+
+### Out of the box validation
+
+### Out of box Strategies 
+
+### Tests
+Tests are run using jest, to run the tests use:
+```bash
+npm test
+```
+
+### Credit
+
+###License
+
+###Keywords
 
 ### Writing and publishing ruleset
 

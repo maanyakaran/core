@@ -26,12 +26,12 @@ const Maanyakaran = function (constraints) {
                     if(nameSpace[functionName]){
                         return nameSpace[functionName];
                     }
-                    throw new Error("hello")
+                    throw new Error("Invalid Namespace")
                 }
                 if(ruleFunctions[functionName]){
                     return ruleFunctions[functionName];
                 }
-                throw new Error("shello")
+                throw new Error("Invalid Function")
             }
 
             let closureArg = ruleFunctionString.split('-');

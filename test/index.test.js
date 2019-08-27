@@ -209,7 +209,6 @@ describe('Validator Object tests', () => {
                     ]
                 }
         })
-        debugger
         expect(expected).toEqual(
             {
                 person: {
