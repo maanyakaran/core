@@ -1,12 +1,12 @@
 const Maanyakaran = require('../index')
-const NumbersStrategy = require('../lib/NumberStrategy')
+const NumberStrategy = require('../lib/NumberStrategy')
 
 
 describe('Validator Object tests', () => {
 
 
     it('should implement strategy for package based validation rules', () => {
-        Maanyakaran.addValidationStrategy(NumbersStrategy)
+        Maanyakaran.addValidationStrategy(NumberStrategy)
         const constraints = {
             person: {
                 name: "nonEmptyString",
@@ -33,11 +33,11 @@ describe('Validator Object tests', () => {
     })
 
     it('should implement closure based validation rules with params for namespace', () => {
-        Maanyakaran.addValidationStrategy(NumbersStrategy)
-        Maanyakaran.addValidationRule('lessThan', NumbersStrategy.lessThan)
+        Maanyakaran.addValidationStrategy(NumberStrategy)
+        Maanyakaran.addValidationRule('lessThan', NumberStrategy.lessThan)
         const constraints = {
             person: {
-                age: "NumberStrategy:lessThan-100"
+                age: "lessThan-100"
             }
         }
 
@@ -75,7 +75,7 @@ describe('Validator Object tests', () => {
     })
 
     it('should throw exception if given validation function is not defined in namespace', () => {
-        Maanyakaran.addValidationStrategy(NumbersStrategy)
+        Maanyakaran.addValidationStrategy(NumberStrategy)
         const constraints = {
             person: {
                 age: "NumberStrategy:Found-110"

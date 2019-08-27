@@ -26,7 +26,7 @@ const Maanyakaran = function (constraints) {
                     if(nameSpace[functionName]){
                         return nameSpace[functionName];
                     }
-                    throw new Error("Invalid Namespace")
+                    throw new Error("Invalid Function in Namespace")
                 }
                 if(ruleFunctions[functionName]){
                     return ruleFunctions[functionName];

@@ -6,7 +6,7 @@
 )) is a hindi word which means validation, which is the basic offering of this micro framework. 
 Maanyakarn provide easy and extensible way for performing validations over JS objects (primarily states of react, redux and similar frameworks).
 
-###Installation
+### Installation
 
 Install the library
 ```bash
@@ -15,7 +15,17 @@ Install the library
 
 ### Usage Guide
 
-#####Concepts
+##### Without ES6
+```javascript
+var Maanyakaran = require('maanyakaran');
+```
+
+##### ES6
+```javascript
+import Maanyakaran from 'maanyakaran';
+```
+
+##### Concepts
 
   1. Constraints:<br/>
      Maanyakaran class takes constraints object as an argument to its constructor which contains key value pairs, where 
@@ -41,7 +51,7 @@ Install the library
      i. string:<br/>
         String could be comma separated strings or just one string.<br/>
         Each string could be in the form : <br/>
-        &lt;Namespace:&gt;&lt;validationFunctionName&gt <br/>
+        &lt;Namespace:&gt;&lt;validationFunctionName&gt;<br/>
         or <br/>
         &lt;Namespace:&gt;&lt;validationFunctionName-&gt;&lt;closureArgument&gt;<br/>
         where Namespace is optional.
@@ -51,7 +61,7 @@ Install the library
            const constraints = 
              {
                  person: {
-                     age: "NumberStrategy:lessThan-100",
+                     age: "NumberStrategy:lessThan-100",//closure function with 100 as argument
                      name: "nonEmptyString",
                      email: "nonEmptyString, validEmail",
                      age: "NumberStrategy:lessThan100"
@@ -78,23 +88,54 @@ Install the library
               }                  
           };
                       
-
-#####Without ES6
-```javascript
-var Maanyakaran = require('maanyakaran');
-```
-
-#####ES6
-```javascript
-import Maanyakaran from 'maanyakaram';
-```
-
-
-### Creating Custom Strategy and Extension
-
 ### Out of the box validation
 
+    Maanyakaran comes up with a few built-in validator functions:<br/>
+    
+    1. nonEmptyString <br/>
+       checks if the string has a length of zero.
+    2. validEmail<br/>
+       checks if the string is an email.
+    3. positiveInteger <br/>
+       checks if the given integer is a positive integer.
+
 ### Out of box Strategies 
+
+     Maanyakaran comes up with a buitin NumberStrategy to validate numbers. It includes following validator functions:<br/>
+     
+     1. positiveInteger
+        checks if the given integer is a positive integer.
+     2. lessThan100
+        checks if the given integer is less than 100.
+     3. lessThan
+        closure function which takes an argument say k and checks if given input is less than k.
+    
+
+### Creating Custom Strategy and Extension
+    Maanyakaran lets you easily create your own validators that fits your needs.
+    You can register them using addValidationStrategy or addValidationRule.
+    
+    1. addValidationStrategy<br/>
+       It lets you add a library of validators.
+       ```javascript
+       Maanyakaran.addValidationStrategy(NumberStrategy)
+           const constraints = {
+               person: {
+                  age: "NumberStrategy:Found-110"
+               }
+           }
+       ```    
+       
+    2. addValidationRule <br/>
+       It lets you add a custom validator function
+       ``` javascript
+           Maanyakaran.addValidationRule('greaterThanFive', (subject) => {
+               if (subject > 5) {
+                    return null
+               }
+               return "Number should be greater than five"
+           })
+       ```            
 
 ### Tests
 Tests are run using jest, to run the tests use:
@@ -106,7 +147,7 @@ npm test
 
 ###License
 
-###Keywords
+### Keywords
 
 ### Writing and publishing ruleset
 
