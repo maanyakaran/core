@@ -17,7 +17,7 @@ Install the library
 
 #####Concepts
 
-  1. Constraints:
+  1. Constraints:<br/>
      Maanyakaran class takes constraints object as an argument to its constructor which contains key value pairs, where 
      value defines rules for the key.
      ```javascript
@@ -27,28 +27,28 @@ Install the library
         const validator = new Maanyakaran(constraints)
      ```
 
-  2. Input:
+  2. Input:<br/>
      Instance of Maanyakaran object invokes validate method with input as an argument and validates the input against 
      the constraints.
      ```javascript
          validator.validate({anotherName: "maanyakaran"})
      ```
      
-  3. Validator method
+  3. Validator method<br/>
      Validator method returns error message if the value for the corresponding key is invalid as per the constraint.        
   
-  4. Types of values in constraint
-     i. string:
+  4. Types of values in constraint<br/>
+     i. string:<br/>
         String could be comma separated strings or just one string.
         Each string could be in the form : 
         <Namespace:><validationFunctionName> or 
         <Namespace:><validationFunctionName-><closureArgument>
         where Namespace is optional.
           
-     ii. Object: 
+     ii. Object: <br/>
          value can itself be an object to validate for nested object structure in the input.
      
-     iii. Array object: 
+     iii. Array object: <br/>
           value can also be an array to indicate that the corresponding key can occur multiple times and should be 
           validated as per the containing constraint object in the array. 
            
