@@ -62,12 +62,10 @@ import Maanyakaran from 'maanyakaran';
            email: ""
         }
      })     
-     ```
-     #####Output
-     ```javascript
-     person: {
-        email: ["Empty String", "Invalid email"]
-     }
+     //    validate returns below output:
+     //    person: {
+     //        email: ["Empty String", "Invalid email"]
+     //    }
      ```
      
   
@@ -103,16 +101,42 @@ import Maanyakaran from 'maanyakaran';
           
         eg:
         ```javascript
-           const constraints = {
-               person: {
-                   children: [
-                       {
-                           name: "nonEmptyString",
-                           age: "positiveInteger"
-                       }
-                   ]
-               }                  
-           };
+        const constraints = {
+            person: {
+                children: [
+                    {
+                        name: "nonEmptyString",
+                        age: "positiveInteger"
+                    }
+                ]
+            }                  
+        };
+        let expected = validator.validate({
+            person: {
+                children: [
+                    {
+                        name: "peter",
+                        age: -1
+                    },
+                    {
+                        name: "",
+                        age: 5
+                    }
+                ]
+            }
+        })
+        //    expected object 
+        //    person: {
+        //          children: {
+        //             0: {
+        //                     age: ["non positive integer"]
+        //                 },
+        //             1: {
+        //                     name: ["Empty String"]
+        //                 }
+        //             }
+        //          }
+        //      }
         ```         
                       
 ### Out of box validation
@@ -121,19 +145,20 @@ import Maanyakaran from 'maanyakaran';
     
     | Validator       |                     Description                            |
     |-----------------|------------------------------------------------------------|
-    | nonEmptyString  |     checks if the subject string has a length of zero.     |
-    | validEmail      |          checks if the subject string is an email.         |
-    | positiveInteger | checks if the subject integer is a positive integer.       |
+    | nonEmptyString  |    checks if the subject string has a length of zero.      |
+    | validEmail      |    checks if the subject string is an email.               |
+    | positiveInteger |    checks if the subject integer is a positive integer.    |
 
 ### Out of box Strategies 
 
    Maanyakaran comes up with a built-in NumberStrategy to validate numbers. It includes following validator functions:<br/>
      
-    | Validator       | Description                                                                                |
-    |-----------------|--------------------------------------------------------------------------------------------|
-    | positiveInteger | checks if the subject integer is a positive integer.                                       |
-    | lessThan100     | checks if the subject integer is less than 100.                                            |
-    | lessThan        | closure function which takes an argument say k and checks if subject input is less than k. |
+    | Validator       | Description                                                                   |
+    |-----------------|-------------------------------------------------------------------------------|
+    | positiveInteger | checks if the subject integer is a positive integer.                          |
+    | lessThan100     | checks if the subject integer is less than 100.                               |
+    | lessThan        | closure function which takes an argument say k and checks if subject          |
+    |                 |input is less than k.                                                          |
     
 
 ### Creating Custom Strategy and Extension
