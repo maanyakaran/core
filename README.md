@@ -76,67 +76,68 @@ import Maanyakaran from 'maanyakaran';
      iii. Array object: <br/>
           value can also be an array to indicate that the corresponding key can occur multiple times and should be 
           validated as per the containing constraint object in the array. 
-           
-          eg
-          ```javascript
-          const constraints = {
-              person: {
-                  children: [
-                      {
-                          name: "nonEmptyString",
-                          age: "positiveInteger"
-                      }
-                  ]
-              }                  
-          };
-          ```
+          
+        eg:
+        ```javascript
+           const constraints = {
+               person: {
+                   children: [
+                       {
+                           name: "nonEmptyString",
+                           age: "positiveInteger"
+                       }
+                   ]
+               }                  
+           };
+        ```         
                       
 ### Out of box validation
 
-    Maanyakaran comes up with a few built-in validator functions:<br/>
+  Maanyakaran comes up with a few built-in validator functions:<br/>
     
-    1. nonEmptyString <br/>
-       checks if the string has a length of zero.
-    2. validEmail<br/>
-       checks if the string is an email.
-    3. positiveInteger <br/>
-       checks if the given integer is a positive integer.
+    | Validator       |                     Description                            |
+    |-----------------|------------------------------------------------------------|
+    | nonEmptyString  |     checks if the subject string has a length of zero.     |
+    | validEmail      |          checks if the subject string is an email.         |
+    | positiveInteger | checks if the subject integer is a positive integer.       |
 
 ### Out of box Strategies 
 
-     Maanyakaran comes up with a buitin NumberStrategy to validate numbers. It includes following validator functions:<br/>
+   Maanyakaran comes up with a built-in NumberStrategy to validate numbers. It includes following validator functions:<br/>
      
-     | Validator       | Description                                                                              |
-     |-----------------|------------------------------------------------------------------------------------------|
-     | positiveInteger | checks if the given integer is a positive integer.                                       |
-     | lessThan100     | checks if the given integer is less than 100.                                            |
-     | lessThan        | closure function which takes an argument say k and checks if given input is less than k. |
+    | Validator       | Description                                                                                |
+    |-----------------|--------------------------------------------------------------------------------------------|
+    | positiveInteger | checks if the subject integer is a positive integer.                                       |
+    | lessThan100     | checks if the subject integer is less than 100.                                            |
+    | lessThan        | closure function which takes an argument say k and checks if subject input is less than k. |
     
 
 ### Creating Custom Strategy and Extension
-    Maanyakaran lets you easily create your own validators that fits your needs.
-    You can register them using addValidationStrategy or addValidationRule.
+   Maanyakaran lets you easily create your own validators that fits your needs.
+   You can register them using addValidationStrategy or addValidationRule.
     
-    1. addValidationStrategy<br/>
+   1. addValidationStrategy<br/>
        It lets you add a library of validators.
+       
        ```javascript
        Maanyakaran.addValidationStrategy(NumberStrategy)
-           const constraints = {
-               person: {
-                  age: "NumberStrategy:Found-110"
-               }
-           }
+       const constraints = {
+          person: {
+              age: "NumberStrategy:Found-110"
+          }
+       }
        ```    
        
-    2. addValidationRule <br/>
-       It lets you add a custom validator function
-       ``` javascript
-           Maanyakaran.addValidationRule('greaterThanFive', (subject) => {
-               if (subject > 5) {
-                    return null
-               }
-               return "Number should be greater than five"
-           })
+   2. addValidationRule <br/>
+       It lets you add a custom validator function.
+       
+       ```javascript
+       Maanyakaran.addValidationRule('greaterThanFive', (subject) => {
+           if (subject > 5) {
+               return null
+           }
+           return "Number should be greater than five"
+       })
        ```            
 
 ### Tests
