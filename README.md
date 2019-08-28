@@ -32,21 +32,44 @@ import Maanyakaran from 'maanyakaran';
      Maanyakaran class takes constraints object as an argument to its constructor which contains key value pairs, where 
      value defines rules for the key.
      ```javascript
-        const constraints = {
-             anotherName: "nonEmptyString"
-        }
-        const validator = new Maanyakaran(constraints)
+     const constraints = {
+         anotherName: "nonEmptyString"
+     }
+     const validator = new Maanyakaran(constraints)
      ```
 
   2. Input:<br/>
      Instance of Maanyakaran object invokes validate method with input as an argument and validates input against 
      given constraints.
      ```javascript
-         validator.validate({anotherName: "maanyakaran"})
+     validator.validate({anotherName: "maanyakaran"})
      ```
      
-  3. Validator method<br/>
-     Validator method returns error message if the value for the corresponding key is invalid as per the constraint.        
+  3. validate()<br/>
+     validate method of Maanyakaran object returns object with keys as per input object and value as an array of error 
+     message(s) if the value for the corresponding key is invalid as per the constraints.   
+     ```javascript
+     const constraints = {
+         person: {
+             name: "nonEmptyString",
+             email: "nonEmptyString, validEmail"
+         }
+     }
+     const validator = new Maanyakaran(constraints);
+     validator.validate({
+        person: {
+           name: "gourav",
+           email: ""
+        }
+     })     
+     ```
+     #####Output
+     ```javascript
+     person: {
+        email: ["Empty String", "Invalid email"]
+     }
+     ```
+     
   
   4. Types of values in constraint<br/>
      i. string:<br/>
@@ -55,7 +78,8 @@ import Maanyakaran from 'maanyakaran';
         &lt;Namespace:&gt;&lt;validationFunctionName&gt;<br/>
         or <br/>
         &lt;Namespace:&gt;&lt;validationFunctionName-&gt;&lt;closureArgument&gt;<br/>
-        where Namespace is optional, which refers to the name of the library of validators.
+        where Namespace is optional, which refers to the name of the library of validators.<br/>
+        validationFunction is required and it is the function name which is used to validate input.
         
         eg:
         ```javascript
@@ -127,6 +151,7 @@ import Maanyakaran from 'maanyakaran';
           }
        }
        ```    
+       Refer to [a relative link](./lib/NumberStrategy.js)NumberStrategy to implement your own strategy.
        
    2. addValidationRule <br/>
        It lets you add a custom validator function.
