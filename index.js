@@ -26,12 +26,12 @@ const Maanyakaran = function (constraints) {
                     if(nameSpace[functionName]){
                         return nameSpace[functionName];
                     }
-                    throw new Error("hello")
+                    throw new Error("Invalid Function in Namespace")
                 }
                 if(ruleFunctions[functionName]){
                     return ruleFunctions[functionName];
                 }
-                throw new Error("shello")
+                throw new Error("Invalid Function")
             }
 
             let closureArg = ruleFunctionString.split('-');
@@ -42,7 +42,7 @@ const Maanyakaran = function (constraints) {
         }
 
 
-        let strategyValues = ruleString.split(':').map(str=>str.trim());
+        let strategyValues = ruleString.split(':').map(str => str.trim());
 
         //return rule function from name space
         if (strategyValues.length > 1) {
@@ -53,7 +53,7 @@ const Maanyakaran = function (constraints) {
     }
 
     function getRuleFunctionsList(constraintsString) {
-        let ruleStrings = constraintsString.split(',').map(str=>str.trim())
+        let ruleStrings = constraintsString.split(',').map(str => str.trim())
         return ruleStrings.map(getRuleFunction)
     }
 
