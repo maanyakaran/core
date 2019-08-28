@@ -55,7 +55,7 @@ import Maanyakaran from 'maanyakaran';
         &lt;Namespace:&gt;&lt;validationFunctionName&gt;<br/>
         or <br/>
         &lt;Namespace:&gt;&lt;validationFunctionName-&gt;&lt;closureArgument&gt;<br/>
-        where Namespace is optional.
+        where Namespace is optional, which refers to the name of the library of validators.
         
         eg:
         ```javascript
@@ -106,12 +106,11 @@ import Maanyakaran from 'maanyakaran';
 
      Maanyakaran comes up with a buitin NumberStrategy to validate numbers. It includes following validator functions:<br/>
      
-     1. positiveInteger
-        checks if the given integer is a positive integer.
-     2. lessThan100
-        checks if the given integer is less than 100.
-     3. lessThan
-        closure function which takes an argument say k and checks if given input is less than k.
+     | Validator       | Description                                                                              |
+     |-----------------|------------------------------------------------------------------------------------------|
+     | positiveInteger | checks if the given integer is a positive integer.                                       |
+     | lessThan100     | checks if the given integer is less than 100.                                            |
+     | lessThan        | closure function which takes an argument say k and checks if given input is less than k. |
     
 
 ### Creating Custom Strategy and Extension

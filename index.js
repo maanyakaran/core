@@ -42,7 +42,7 @@ const Maanyakaran = function (constraints) {
         }
 
 
-        let strategyValues = ruleString.split(':').map(str=>str.trim());
+        let strategyValues = ruleString.split(':').map(str => str.trim());
 
         //return rule function from name space
         if (strategyValues.length > 1) {
@@ -53,7 +53,7 @@ const Maanyakaran = function (constraints) {
     }
 
     function getRuleFunctionsList(constraintsString) {
-        let ruleStrings = constraintsString.split(',').map(str=>str.trim())
+        let ruleStrings = constraintsString.split(',').map(str => str.trim())
         return ruleStrings.map(getRuleFunction)
     }
 
