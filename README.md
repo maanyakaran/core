@@ -4,7 +4,8 @@
 
  Maanyakarn ([मान्यकरण](https://translate.google.co.in/#view=home&op=translate&sl=hi&tl=en&text=maanyakaran
 )) is a hindi word which means validation, which is the basic offering of this micro framework. 
-Maanyakarn provide easy and extensible way for performing validations over JS objects (primarily states of react, redux and similar frameworks).
+Maanyakarn provides easy and extensible way of performing validations over JS objects (primarily states of react, redux 
+and similar frameworks).
 
 ### Installation
 
@@ -64,7 +65,7 @@ import Maanyakaran from 'maanyakaran';
                      age: "NumberStrategy:lessThan-100",//closure function with 100 as argument
                      name: "nonEmptyString",
                      email: "nonEmptyString, validEmail",
-                     age: "NumberStrategy:lessThan100"
+                     count: "NumberStrategy:lessThan100"
                  }
              }
         ```
@@ -144,14 +145,6 @@ Tests are run using jest, to run the tests use:
 ```bash
 npm test
 ```
-
-### Credit
-
-###License
-
-### Keywords
-
-### Writing and publishing ruleset
 
 ### License (MIT)
 ```
