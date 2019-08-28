@@ -151,7 +151,7 @@ import Maanyakaran from 'maanyakaran';
           }
        }
        ```    
-       Refer to [a relative link](./lib/NumberStrategy.js)NumberStrategy to implement your own strategy.
+       Refer to [NumberStrategy](./lib/NumberStrategy.js) to implement your own strategy.
        
    2. addValidationRule <br/>
        It lets you add a custom validator function.
