@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Maanyakaran(मान्यकरण) [meaning: validation], Micro framework for validation of JS Objects or react and redux etc states",
   "main": "index.js",
-  "repository": "git@github.com:ashwinijalkote/maanyakaran.git",
+  "repository": "https://github.com/maanyakaran/core.git",
   "author": "Ashwini Jalkote",
   "license": "MIT",
   "private": false,
