@@ -1,5 +1,6 @@
-const Maanyakaran = require('../index')
-const NumberStrategy = require('../lib/NumberStrategy')
+const Maanyakaran = require('../index');
+const StringStrategy = require( "../lib/StringStrategy");
+const NumberStrategy = require('../lib/NumberStrategy');
 
 
 describe('Validator Object tests', () => {
@@ -7,6 +8,8 @@ describe('Validator Object tests', () => {
 
     it('should implement strategy for package based validation rules', () => {
         Maanyakaran.addValidationStrategy(NumberStrategy)
+        Maanyakaran.addValidationRule('nonEmptyString', StringStrategy.nonEmptyString);
+        Maanyakaran.addValidationRule('validEmail', StringStrategy.validEmail);
         const constraints = {
             person: {
                 name: "nonEmptyString",
@@ -187,13 +190,14 @@ describe('Validator Object tests', () => {
                 children: [
                     {
                         name: "nonEmptyString",
-                        age: "positiveInteger"
+                        age: "NumberStrategy:positiveInteger"
                     }
                 ]
             }
         };
 
         const validator = new Maanyakaran(constraints);
+
         let expected = validator.validate({
             person:
                 {

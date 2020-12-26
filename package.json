@@ -12,5 +12,8 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "yarn": "^1.22.10"
   }
 }
