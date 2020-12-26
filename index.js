@@ -42,7 +42,6 @@ const Maanyakaran = function (constraints) {
         return ruleStrings.map(getRuleFunction)
     }
 
-
     this.validate = function (input) {
         let output = {};
 
@@ -81,6 +80,7 @@ const Maanyakaran = function (constraints) {
             }
 
         }
+
         return Object.keys(output).length === 0 ? null : output;
     }
 

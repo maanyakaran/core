@@ -32,17 +32,17 @@ import Maanyakaran from 'maanyakaran';
      Maanyakaran class takes constraints object as an argument to its constructor which contains key value pairs, where 
      value defines rules for the key.
      ```javascript
-     const constraints = {
-         anotherName: "nonEmptyString"
-     }
-     const validator = new Maanyakaran(constraints)
+         const constraints = {
+             anotherName: "nonEmptyString"
+         }
+         const validator = new Maanyakaran(constraints)
      ```
 
   2. Input:<br/>
      Instance of Maanyakaran object invokes validate method with input as an argument and validates input against 
      given constraints.
      ```javascript
-     validator.validate({anotherName: "maanyakaran"})
+       validator.validate({anotherName: "maanyakaran"})
      ```
      
   3. validate()<br/>
@@ -161,37 +161,46 @@ import Maanyakaran from 'maanyakaran';
     |                 |input is less than k.                                                          |
     
 
-### Creating Custom Strategy and Extension
+### Creating Custom Strategy or Validations rules
    Maanyakaran lets you easily create your own validators that fits your needs.
    You can register them using addValidationStrategy or addValidationRule.
-    
-   1. addValidationStrategy<br/>
-       It lets you add a library of validators.
-       
-       ```javascript
-       Maanyakaran.addValidationStrategy(NumberStrategy)
-       const constraints = {
-          person: {
-              age: "NumberStrategy:Found-110"
+   #### Validation rule. 
+   One can write it's own custom validation rule for their specific purpose. A validation rule is a simple JS function 
+   which is provided with the specific state variable as subject and expect either null in case is given subject passes validation
+   or an error string if it fails validation as output. Refer example below.
+   
+   ##### addValidationRule <br/>
+  It lets you add a custom validator function.
+  
+  ```javascript
+      Maanyakaran.addValidationRule('greaterThanFive', (subject) => {
+          if (subject > 5) {
+              return null
           }
-       }
-       ```    
-       Refer to [NumberStrategy](./lib/NumberStrategy.js) to implement your own strategy.
+          return "Number should be greater than five"
+      })
+   ```    
+   #### Strategy 
+   ##### addValidationStrategy<br/>
+   A Strategy is a group of validation rules under a name space. Use of strategy gives one ability to provide namespaces to their
+   validation rules. A strategy can be added and used as shown below. One can create own strategy by define strategy by creating a 
+   named JS object with validation rules attached to its key. 
        
-   2. addValidationRule <br/>
-       It lets you add a custom validator function.
+  ```javascript
+   Maanyakaran.addValidationStrategy(NumberStrategy)
+   const constraints = {
+      person: {
+          age: "NumberStrategy:Found-110"
+      }
+   }
+  ```    
+  Refer to [NumberStrategy](./lib/NumberStrategy.js) to implement your own strategy.
        
-       ```javascript
-       Maanyakaran.addValidationRule('greaterThanFive', (subject) => {
-           if (subject > 5) {
-               return null
-           }
-           return "Number should be greater than five"
-       })
-       ```            
+        
 
 ### Tests
 Tests are run using jest, to run the tests use:
+
 ```bash
 npm test
 ```
