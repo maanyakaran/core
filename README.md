@@ -268,13 +268,12 @@ age: 5
 
 Maanyakaran comes up with a few built-in validator functions:<br/>
 
-`
+
 | Validator | Description |  
 | ----------- | ----------- |  
 | nonEmptyString | checks if the subject string has a length of zero. |  
 | validEmail | checks if the subject string is an email.  |
 | positiveInteger | checks if the subject integer is a positive integer. |
-`
 
 
   
@@ -284,13 +283,12 @@ Maanyakaran comes up with a few built-in validator functions:<br/>
   
 
 Maanyakaran comes up with a built-in NumberStrategy to validate numbers. It includes following validator functions:<br/>
-
-`  
+ 
 | Validator | Description |  
 | ----------- | ----------- |  
 | positiveInteger | checks if the subject integer is a positive integer. |  
 | lessThan100 | checks if the subject integer is less than 100. |
-| lessThan | closure function which takes an argument say k and checks if subject input is less than k.|`
+| lessThan | closure function which takes an argument say k and checks if subject input is less than k.|
 
 
   
