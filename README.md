@@ -1,5 +1,4 @@
-# Maanyakaran ![alt text](https://travis-ci.org/ashwinijalkote/maanyakaran.svg?branch=master)
-
+# Maanyakaran ![Maanyakaran Jest Test](https://github.com/devAgam/core/workflows/Maanyakaran%20Jest%20Test/badge.svg)
   
   
   
