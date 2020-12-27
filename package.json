@@ -2,7 +2,13 @@
   "name": "maanyakaran",
   "version": "1.0.3",
   "description": "Maanyakaran(मान्यकरण) [meaning: validation], Micro framework for validation of JS Objects or react and redux etc states",
-  "keywords": ["validation", "state validation", "react-validation", "redux validation", "extensible"],
+  "keywords": [
+    "validation",
+    "state validation",
+    "react-validation",
+    "redux validation",
+    "extensible"
+  ],
   "main": "index.js",
   "repository": "https://github.com/maanyakaran/core.git",
   "author": "Maanyakaran Team <maanyakaran@gourav.info>",
@@ -15,6 +21,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "yarn": "^1.22.10"
+    "validator": "^11.1.0"
   }
 }

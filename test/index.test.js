@@ -1,5 +1,5 @@
 const Maanyakaran = require('../index');
-const StringStrategy = require( "../lib/StringStrategy");
+const StringStrategy = require( "../lib/CommonFormStrategy");
 const NumberStrategy = require('../lib/NumberStrategy');
 
 
