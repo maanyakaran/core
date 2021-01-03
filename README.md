@@ -46,7 +46,7 @@ import Maanyakaran from 'maanyakaran';
      ```
      
   3. validate()<br/>
-     validate method of Maanyakaran object returns object with keys as per input object and value as an array of error 
+     validate method of Maanyakaran object returns `ValidationResults` object with keys as per input object and value as an array of error 
      message(s) if the value for the corresponding key is invalid as per the constraints.   
      ```javascript
      const constraints = {
@@ -58,13 +58,15 @@ import Maanyakaran from 'maanyakaran';
      const validator = new Maanyakaran(constraints);
      validator.validate({
         person: {
-           name: "gourav",
+           name: "peter",
            email: ""
         }
      })     
      //    validate returns below output:
+     //    {
      //    person: {
      //        email: ["Empty String", "Invalid email"]
+     //    }
      //    }
      ```
      

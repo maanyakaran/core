@@ -1,14 +1,13 @@
 const Maanyakaran = require('../index');
-const StringStrategy = require( "../lib/CommonFormStrategy");
+const StringStrategy = require("../lib/CommonFormStrategy");
 const NumberStrategy = require('../lib/NumberStrategy');
 
 
 describe('Validator Object tests', () => {
-
-
+    Maanyakaran.addValidationStrategy(NumberStrategy)
+    Maanyakaran.addValidationRule('nonEmptyString', StringStrategy.nonEmptyString);
     it('should implement strategy for package based validation rules', () => {
-        Maanyakaran.addValidationStrategy(NumberStrategy)
-        Maanyakaran.addValidationRule('nonEmptyString', StringStrategy.nonEmptyString);
+
         Maanyakaran.addValidationRule('validEmail', StringStrategy.validEmail);
         const constraints = {
             person: {
@@ -23,7 +22,7 @@ describe('Validator Object tests', () => {
         expect(validator.validate({
             person:
                 {
-                    name: "gourav",
+                    name: "peter",
                     email: "",
                     age: 101
                 }
@@ -184,6 +183,7 @@ describe('Validator Object tests', () => {
 
     })
 
+
     it('should check validations for array based nested objects', () => {
         const constraints = {
             person: {
@@ -229,6 +229,66 @@ describe('Validator Object tests', () => {
         )
 
     })
+
+    it("Should return true when isValid is invoked on object having no errors", () => {
+        const constraints = {
+            person: {
+                children: [
+                    {
+                        name: "nonEmptyString",
+                        age: "NumberStrategy:positiveInteger"
+                    }
+                ]
+            }
+        };
+
+        const validator = new Maanyakaran(constraints);
+
+        let outcome = validator.validate({
+            person:
+                {
+                    children: [
+                        {
+                            name: "peter",
+                            age: 1
+                        }
+                    ]
+                }
+        })
+        expect(outcome.isValid()).toBe(true);
+        expect(outcome).toEqual({person: {children: {"0": null}}});
+    })
+
+    it("Should return false when isValid is invoked on object having errors", () => {
+        const constraints = {
+            person: {
+                children: [
+                    {
+                        name: "nonEmptyString",
+                        age: "NumberStrategy:positiveInteger",
+                        emails: ["validEmail"]
+                    }
+                ]
+            }
+        };
+
+        const validator = new Maanyakaran(constraints);
+
+        let outcome = validator.validate({
+            person:
+                {
+                    children: [
+                        {
+                            name: "peter",
+                            age: -1
+                        }
+                    ]
+                }
+        })
+        expect(outcome.isValid()).toBe(false);
+        expect(outcome).toEqual({person: {children: {"0": { age: ["non positive integer"],emails: {}}}}});
+    })
+
 })
 
 
