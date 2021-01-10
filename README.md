@@ -25,6 +25,26 @@ var Maanyakaran = require('maanyakaran');
 ```javascript
 import Maanyakaran from 'maanyakaran';
 ```
+##### Simple example with supplied strategies
+```javascript
+var Maanyakaran = require('maanyakaran');
+Maanyakaran.addValidationStrategy(Maanyakaran.Strategies.Form);
+const constraints = {
+    person: {
+        name: "Form:nonEmptyString",
+        email: "Form:nonEmptyString, Form:validEmail"
+    }
+}; //contraints should follow json order of the your input
+
+const validationResults  = validator.validate({
+    person:
+        {
+            name: "peter",
+            email: "",
+            age: 101
+        }
+});
+```
 
 ##### Concepts
 
