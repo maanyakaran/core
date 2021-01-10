@@ -194,7 +194,7 @@ import Maanyakaran from 'maanyakaran';
       }
    }
   ```    
-  Refer to [NumberStrategy](./lib/NumberStrategy.js) to implement your own strategy.
+  Refer to [NumberStrategy](strategies/NumberStrategy.js) to implement your own strategy.
        
         
 

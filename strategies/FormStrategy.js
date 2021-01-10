@@ -1,4 +1,5 @@
-const CommonFormStrategy = {
+const FormStrategy = {
+    name:"Form",
     nonEmptyString: function (subject) {
         return subject.length === 0 ? 'Empty String' : null;
     }
@@ -12,4 +13,4 @@ const CommonFormStrategy = {
     }
 };
 
-module.exports = CommonFormStrategy;
+module.exports = FormStrategy;
