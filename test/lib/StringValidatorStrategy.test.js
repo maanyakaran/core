@@ -1,4 +1,4 @@
-const StringValidatorStrategy = require('../../lib/StringValidatorStrategy');
+const StringValidatorStrategy = require('../../strategies/StringStrategy');
 
 describe('String Validator tests', () => {
     it('should test contains validator method for valid input', () => {

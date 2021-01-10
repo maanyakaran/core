@@ -1,5 +1,5 @@
 function NumberStrategy() {
-    this.name = "NumberStrategy";
+    this.name = "Number";
 
     this.positiveInteger = (subject) => {
         return Number.isInteger(subject) && subject > 0 ? null : 'non positive integer';

@@ -1,7 +1,7 @@
 const StringValidator = require('validator');
 
 function StringStrategy() {
-    this.name = "StringValidatorStrategy";
+    this.name = "String";
 
     this.contains = (seed) => (subject) => {
         return StringValidator.contains(subject, seed) ? null : 'Does not contain ' + seed;
