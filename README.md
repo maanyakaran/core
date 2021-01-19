@@ -1,4 +1,4 @@
-# Maanyakaran ![alt text](https://travis-ci.org/ashwinijalkote/maanyakaran.svg?branch=master)
+# Maanyakaran ![Tests](https://github.com/maanyakaran/core/workflows/tests/badge.svg)
 
 
 
