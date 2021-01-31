@@ -3,6 +3,12 @@ const strategyMap = {};
 
 const Maanyakaran = function (constraints) {
 
+    function ValidationResults() {}
+    ValidationResults.prototype.valid = {};
+    ValidationResults.prototype.isValid = function () {
+        return this.flags.valid
+    }
+
     function getRuleFunction(ruleString) {
 
         function getFunctionFromString(ruleFunctionString, nameSpace) {
@@ -42,13 +48,12 @@ const Maanyakaran = function (constraints) {
         return ruleStrings.map(getRuleFunction)
     }
 
-    this.validate = function (input) {
-        let output = {};
-
+    this.validate = function (input, flags = {valid:true}) {
+        let output = new ValidationResults();
         function handleArrayInRule(key) {
-            output[key] = {};
+            output[key] = new ValidationResults();
             for (let inputArrayIdx in input[key]) {
-                output[key][inputArrayIdx] = new Maanyakaran(constraints[key][0]).validate(input[key][inputArrayIdx]);
+                output[key][inputArrayIdx] = new Maanyakaran(constraints[key][0]).validate(input[key][inputArrayIdx], flags);
             }
         }
 
@@ -59,6 +64,9 @@ const Maanyakaran = function (constraints) {
                 let applicableRuleFunctions = getRuleFunctionsList(constraints[key])
                 for(let applicableRuleFunction of applicableRuleFunctions){
                     let error = applicableRuleFunction(input[key]);
+                    if(error && flags){
+                        flags.valid = false;
+                    }
                     error && output[key].push(error);
                 }
                 continue;
@@ -68,7 +76,7 @@ const Maanyakaran = function (constraints) {
                 continue;
             }
             if (Object.keys(constraints[key]).length > 0) {
-                output[key] = new Maanyakaran(constraints[key]).validate(input[key]);
+                output[key] = new Maanyakaran(constraints[key]).validate(input[key],flags);
             }
 
         }
@@ -79,7 +87,7 @@ const Maanyakaran = function (constraints) {
             }
 
         }
-
+        output.__proto__.flags = flags
         return Object.keys(output).length === 0 ? null : output;
     }
 
