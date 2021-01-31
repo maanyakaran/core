@@ -4,7 +4,7 @@ const strategyMap = {};
 const Maanyakaran = function (constraints) {
 
     function ValidationResults() {}
-    ValidationResults.prototype.valid = true;
+    ValidationResults.prototype.valid = {};
     ValidationResults.prototype.isValid = function () {
         return this.flags.valid
     }
