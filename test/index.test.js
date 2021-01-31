@@ -1,6 +1,6 @@
 const Maanyakaran = require('../index');
-const StringStrategy = require("../lib/CommonFormStrategy");
-const NumberStrategy = require('../lib/NumberStrategy');
+const StringStrategy = require( "../strategies/FormStrategy");
+const NumberStrategy = require('../strategies/NumberStrategy');
 
 
 describe('Validator Object tests', () => {
@@ -13,7 +13,7 @@ describe('Validator Object tests', () => {
             person: {
                 name: "nonEmptyString",
                 email: "nonEmptyString, validEmail",
-                age: "NumberStrategy:lessThan100"
+                age: "Number:lessThan100"
             }
         }
 
@@ -190,7 +190,7 @@ describe('Validator Object tests', () => {
                 children: [
                     {
                         name: "nonEmptyString",
-                        age: "NumberStrategy:positiveInteger"
+                        age: "Number:positiveInteger"
                     }
                 ]
             }

@@ -77,7 +77,6 @@ const Maanyakaran = function (constraints) {
             }
             if (Object.keys(constraints[key]).length > 0) {
                 output[key] = new Maanyakaran(constraints[key]).validate(input[key],flags);
-                continue;
             }
 
         }
@@ -107,3 +106,8 @@ Maanyakaran.getAll = function(){
 }
 
 module.exports = Maanyakaran;
+module.exports.Strategies = {
+    Number: require('./strategies/NumberStrategy'),
+    String: require('./strategies/StringStrategy'),
+    Form: require('./strategies/FormStrategy')
+}
