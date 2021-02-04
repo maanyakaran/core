@@ -236,7 +236,7 @@ describe('Validator Object tests', () => {
                 children: [
                     {
                         name: "nonEmptyString",
-                        age: "NumberStrategy:positiveInteger"
+                        age: "Number:positiveInteger"
                     }
                 ]
             }
@@ -265,7 +265,7 @@ describe('Validator Object tests', () => {
                 children: [
                     {
                         name: "nonEmptyString",
-                        age: "NumberStrategy:positiveInteger",
+                        age: "Number:positiveInteger",
                         emails: ["validEmail"]
                     }
                 ]
